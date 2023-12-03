@@ -16,10 +16,10 @@ main :: proc() {
     for !rl.WindowShouldClose() {
         rl.BeginDrawing()
         defer rl.EndDrawing()
-        rl.ClearBackground(rl.BLACK)
+        rl.ClearBackground(rl.RAYWHITE)
 
         // <- Call the procs below to draw ->
-        // HelloHeimDalle() // -> draws a pixelated HeimDalle; uncomment to see
+        HelloHeimDalle() // -> draws a pixelated HeimDalle; uncomment to see
     }
 }
 
@@ -35,7 +35,7 @@ HelloHeimDalle :: proc() {
         for y in 1..=SCREEN_HEIGHT {
             center := rl.Vector2{f32(x), f32(y)}
             // <- Check the condition and draw the pixel ->
-            if math.sin_f32(center.x * center.y) >= math.tan_f32(center.x / center.y) {
+            if math.sin_f32(center.x * center.y) >= math.tan_f32(center.x / center.y) * 0.0001 {
                 rl.DrawPixelV(center, color)
             }
         }
