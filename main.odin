@@ -37,6 +37,17 @@ main :: proc() {
     fmt.println(BigTan(2)) // -> returns 2.1850399; uncomment to see
     fmt.println(BigCos(2)) // -> returns -0.41614684; uncomment to see
     fmt.println(BigSin(2)) // -> returns 0.9092974; uncomment to see
+
+    // <- Call the procs below to see the power functions in action ->
+    fmt.println(DoublePow(2)) // -> returns 4; uncomment to see
+    fmt.println(TriplePow(2)) // -> returns 8; uncomment to see
+    fmt.println(QuadPow(2)) // -> returns 16; uncomment to see
+    fmt.println(PentaPow(2)) // -> returns 32; uncomment to see
+    fmt.println(HexaPow(2)) // -> returns 64; uncomment to see
+    fmt.println(SeptaPow(2)) // -> returns 128; uncomment to see
+    fmt.println(OctaPow(2)) // -> returns 256; uncomment to see
+    fmt.println(NonaPow(2)) // -> returns 512; uncomment to see
+    fmt.println(TenPow(2)) // -> returns 1024; uncomment to see
 }
 
 // <- The procs below are the logic gates ->
@@ -93,6 +104,42 @@ BigSin :: proc(x: int) -> f32 {
     return math.sin_f32(f32(x))
 }
 
+DoublePow :: proc(x: int) -> f32 {
+    return math.pow(f32(x), 2)
+}
+
+TriplePow :: proc(x: int) -> f32 {
+    return math.pow(f32(x), 3)
+}
+
+QuadPow :: proc(x: int) -> f32 {
+    return math.pow(f32(x), 4)
+}
+
+PentaPow :: proc(x: int) -> f32 {
+    return math.pow(f32(x), 5)
+}
+
+HexaPow :: proc(x: int) -> f32 {
+    return math.pow(f32(x), 6)
+}
+
+SeptaPow :: proc(x: int) -> f32 {
+    return math.pow(f32(x), 7)
+}
+
+OctaPow :: proc(x: int) -> f32 {
+    return math.pow(f32(x), 8)
+}
+
+NonaPow :: proc(x: int) -> f32 {
+    return math.pow(f32(x), 9)
+}
+
+TenPow :: proc(x: int) -> f32 {
+    return math.pow(f32(x), 10)
+}
+
 // <- The procs below are the pixelated drawings ->
 // <- They use the Raylib library to draw ->
 // <- They are commented out to avoid confusion ->
@@ -110,7 +157,7 @@ HelloHeimDalle :: proc() {
         for y in 1..=SCREEN_HEIGHT {
             center := rl.Vector2{f32(x), f32(y)}
             // <- Check the condition and draw the pixel ->
-            if math.pow(math.sin_f32(center.x - 10), 2) * math.pow(math.tan_f32(center.y - 10), 2) >= math.pow(math.tan_f32(center.x / center.y), 2) * .01 {
+            if DoublePow(int(math.sin_f32(center.x - 10))) * DoublePow(int(math.tan_f32(center.y - 10))) >= DoublePow(int(math.tan_f32(center.x / center.y))) * .01 {
                 rl.DrawPixelV(center, color)
             }
         }
