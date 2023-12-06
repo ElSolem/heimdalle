@@ -68,10 +68,9 @@ Exemplar :: proc() {
 
 QGate :: proc(x, y: int) -> bool {
     if x * y == x / y || x * y != x / y {
-        return true
-    } else {
-        return false
+        fmt.println("QGate is true")
     }
+    return true
 }
 
 BigTan :: proc(x: int) -> f32 {
