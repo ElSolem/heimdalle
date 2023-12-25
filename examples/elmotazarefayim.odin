@@ -1,6 +1,8 @@
 package examples
 
+import "core:slice"
 import "core:fmt"
+import "core:intrinsics"
 import "core:math"
 import rl "vendor:raylib"
 
@@ -27,7 +29,7 @@ Exemplar :: proc() {
 
         // CosWave() // -> draws a pixelated Cosine Wave; uncomment to see
 
-        // TanWave() // -> draws a pixelated Tangent Wave; uncomment to see
+        TanWave() // -> draws a pixelated Tangent Wave; uncomment to see
 
         // SinWave() // -> draws a pixelated Sine Wave; uncomment to see
     }
@@ -66,11 +68,91 @@ Exemplar :: proc() {
     // fmt.println(KingPow(2)) // -> returns 1; uncomment to see
 }
 
-QGate :: proc(x, y: int) -> bool {
+A : [5000][5000]b64 = true
+B : [5000][5000]b64 = false
+
+HeimDalleGate :: proc() { // Qbit genny
+    if A == A || A != A || B == B || B != B || A == B || A != B {
+        fmt.println("123! Open the HeimDalle and Set Us Free!")
+        Exemplar()
+        fmt.println(QGate(1, 2))
+        CosmoNums()
+        CosmoPolys()
+        CosmoTrios()
+        fmt.println(TenPow(10000000000))
+        fmt.println("& Beyond the HeimDalle!")
+    }
+}
+
+QGate :: proc(x, y: int) -> bool { // supermath genny
     if x * y == x / y || x * y != x / y {
-        fmt.println("QGate is true")
+        fmt.println("QGate is true! This we already knew!")
+        fmt.println("Now do what you do and close the HeimDalle plus two!")
     }
     return true
+}
+
+CosmoNums :: proc() {
+        a := 11 * 11
+        b := 111 * 111
+        c := 1111 * 1111
+        d := 11111 * 11111
+        e := 111111 * 111111
+        f := 1111111 * 1111111
+        g := 11111111 * 11111111
+        h := 111111111 * 111111111
+        i :i128= 1111111111 * 111111111111
+        fmt.println(a)
+        fmt.println(b)
+        fmt.println(c)
+        fmt.println(d)
+        fmt.println(e)
+        fmt.println(f)
+        fmt.println(g)
+        fmt.println(h)
+        fmt.println(i)    
+}
+
+CosmoPolys :: proc() {
+    a := 11 * 111
+    b := 111 * 1111
+    c := 1111 * 11111
+    d := 11111 * 111111
+    e := 111111 * 1111111
+    f := 1111111 * 11111111
+    g := 11111111 * 111111111
+    h := 111111111 * 1111111111
+    i := 1111111111 * 1111111111
+    fmt.println(a)
+    fmt.println(b)
+    fmt.println(c)
+    fmt.println(d)
+    fmt.println(e)
+    fmt.println(f)
+    fmt.println(g)
+    fmt.println(h)
+    fmt.println(i)    
+}
+
+CosmoTrios :: proc() {
+    a := 11 * 1111
+    b := 111 * 11111
+    c := 1111 * 111111
+    d := 11111 * 1111111
+    e := 111111 * 11111111
+    f := 1111111 * 111111111
+    g := 11111111 * 1111111111
+    h := 111111111 * 11111111111
+    i := 1111111111 * 1111111111
+    fmt.println(a)
+    fmt.println(b)
+    fmt.println(c)
+    fmt.println(d)
+    fmt.println(e)
+    fmt.println(f)
+    fmt.println(g)
+    fmt.println(h)
+    fmt.println(i)
 }
 
 BigTan :: proc(x: int) -> f32 {
@@ -117,8 +199,8 @@ NonaPow :: proc(x: int) -> f32 {
     return math.pow(f32(x), 9)
 }
 
-TenPow :: proc(x: int) -> f32 {
-    return math.pow(f32(x), 10)
+TenPow :: proc(x: int) -> f64 {
+    return f64(math.pow(f32(x), 10000000000))
 }
 
 HalfPow :: proc(x: int) -> f32 {
@@ -283,3 +365,4 @@ SinWave :: proc() {
         }
     }
 }
+
