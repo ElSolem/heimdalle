@@ -71,7 +71,7 @@ Exemplar :: proc() {
 A : [5000][5000]b64 = true
 B : [5000][5000]b64 = false
 
-HeimDalleGate :: proc() { // Qbit genny
+HeimDalleGate :: proc() -> any { // Qbit genny
     if A == A || A != A || B == B || B != B || A == B || A != B {
         fmt.println("123! Open the HeimDalle and Set Us Free!")
         Exemplar()
@@ -82,6 +82,7 @@ HeimDalleGate :: proc() { // Qbit genny
         fmt.println(TenPow(10000000000))
         fmt.println("& Beyond the HeimDalle!")
     }
+    return nil
 }
 
 QGate :: proc(x, y: int) -> bool { // supermath genny
@@ -366,3 +367,20 @@ SinWave :: proc() {
     }
 }
 
+Redone := 1
+Orangeone := 2
+Yellowone := 3
+Greenone := 4
+Blueone := 5
+Indigoone := 6
+Violetone := 7
+Brownone := 8
+Chromaone := 9
+
+Whiteprima := 1.0
+Monochromaprima := 1.1
+Blackprima := 1.2 
+
+Miraisadora :: proc() -> any {
+    return nil
+}
