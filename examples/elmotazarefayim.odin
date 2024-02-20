@@ -13,25 +13,54 @@ SCREEN_HEIGHT :i32= 720
 Exemplar :: proc() {
     rl.InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "HeimDalle")
     defer rl.CloseWindow()
-    rl.SetTargetFPS(60)
+    player_pos := rl.Vector2{640, 320}
+    player_vel : rl.Vector2
+    player_grounded: bool
 
+    rl.SetTargetFPS(60)
     for !rl.WindowShouldClose() {
         rl.BeginDrawing()
         defer rl.EndDrawing()
         rl.ClearBackground(rl.BLACK)
         
         // <- Call the procs below to draw ->
-        HelloHeimDalle() // -> draws a pixelated HeimDalle Bridge; uncomment to see
+        //HelloHeimDalle() // -> draws a pixelated HeimDalle Bridge; uncomment to see
 
-        AboveNBelow() // -> draws a pixelated Sidis Checkerboard; uncomment to see
+        // AboveNBelow() // -> draws a pixelated Sidis Checkerboard; uncomment to see
 
         // wowza() // -> draws a pixelated HeimDalle Bridge with a twist; uncomment to see
 
         // CosWave() // -> draws a pixelated Cosine Wave; uncomment to see
 
-        TanWave() // -> draws a pixelated Tangent Wave; uncomment to see
+        // TanWave() // -> draws a pixelated Tangent Wave; uncomment to see
 
         // SinWave() // -> draws a pixelated Sine Wave; uncomment to see
+        // NewWave3D()
+        NewWaveTwo()
+        // NewWaveThree()
+
+        if rl.IsKeyDown(.LEFT) {
+            player_vel.x = -400
+        } else if rl.IsKeyDown(.RIGHT) {
+            player_vel.x = 400
+        } else {
+            player_vel.x = 0
+        }
+
+        player_vel.y += 2000 * rl.GetFrameTime()
+
+        if player_grounded && rl.IsKeyPressed(.SPACE) {
+            player_vel.y = -600
+            player_grounded = false
+        }
+
+        player_pos += player_vel * rl.GetFrameTime()
+        if player_pos.y > f32(rl.GetScreenHeight()) - 64 {
+            player_pos.y = f32(rl.GetScreenHeight()) - 64
+            player_grounded = true
+        }
+
+        rl.DrawRectangleV(player_pos, {64, 64}, rl.GREEN)
     }
 
     // <- Call the procs below to see the QGate in action ->
@@ -265,7 +294,7 @@ HelloHeimDalle :: proc() {
         for y in 1..=SCREEN_HEIGHT {
             center := rl.Vector2{f32(x), f32(y)}
             // <- Check the condition and draw the pixel ->
-            if DoublePow(int(math.sin_f32(center.x))) * DoublePow(int(math.tan_f32(center.y))) >= DoublePow(int(math.tan_f32(center.x / center.y))) * .1{
+            if int(math.cos_f32(center.x)) * int(math.sin_f32(center.y)) >= int(math.tan_f32(9.9)) {
                 rl.DrawPixelV(center, color)
             }
         }
@@ -367,6 +396,64 @@ SinWave :: proc() {
     }
 }
 
+
+NewWave3D :: proc() {
+    // <- Calculate hue based on time to change color smoothly ->
+    hue := (f32(rl.GetTime()) / 10) * 36.0
+
+    // <- Calculate color from HSV values ->
+    color := rl.ColorFromHSV(hue, 0.75, 0.75)
+
+    // <- Iterate through each pixel on the screen ->
+    for x in 0..=SCREEN_WIDTH {
+        for y in 0..=(SCREEN_HEIGHT) {
+            center := rl.Vector2{f32(x), f32(y)}
+            // <- Check the condition and draw the pixel ->
+            if math.cos_f32(center.x * center.x * center.x) + math.sin_f32(center.y * center.y * center.y) <= BigTan(0.0) {
+                rl.DrawPixelV(center, color)
+            }
+        }
+    }
+}
+
+NewWaveTwo :: proc() {
+    // <- Calculate hue based on time to change color smoothly ->
+    hue := (f32(rl.GetTime()) / 10) * 36.0
+
+    // <- Calculate color from HSV values ->
+    color := rl.ColorFromHSV(hue, 0.75, 0.75)
+
+    // <- Iterate through each pixel on the screen ->
+    for x in 0..=SCREEN_WIDTH {
+        for y in 0..=(SCREEN_HEIGHT) {
+            center := rl.Vector2{f32(x), f32(y)}
+            // <- Check the condition and draw the pixel ->
+            if math.cos_f32(center.x) * math.sin_f32(center.y) >= BigTan(0.0) {
+                rl.DrawPixelV(center, color)
+            }
+        }
+    }
+}
+
+NewWaveThree :: proc() {
+    // <- Calculate hue based on time to change color smoothly ->
+    hue := (f32(rl.GetTime()) / 10) * 36.0
+
+    // <- Calculate color from HSV values ->
+    color := rl.ColorFromHSV(hue, 0.75, 0.75)
+
+    // <- Iterate through each pixel on the screen ->
+    for x in 0..=SCREEN_WIDTH {
+        for y in 0..=(SCREEN_HEIGHT) {
+            center := rl.Vector2{f32(x), f32(y)}
+            // <- Check the condition and draw the pixel ->
+            if math.cos_f32(center.x) / math.sin_f32(center.y) <= BigTan(0.0) {
+                rl.DrawPixelV(center, color)
+            }
+        }
+    }
+}
+
 Redone := 1
 Orangeone := 2
 Yellowone := 3
@@ -379,8 +466,4 @@ Chromaone := 9
 
 Whiteprima := 1.0
 Monochromaprima := 1.1
-Blackprima := 1.2 
-
-Miraisadora :: proc() -> any {
-    return nil
-}
+Blackprima := 1.2

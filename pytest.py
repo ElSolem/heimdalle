@@ -10,7 +10,7 @@ pygame.init()
 
 # Create a Pygame window
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-pygame.display.set_caption("Alakazan with HeimDalle")
+pygame.display.set_caption("Alakazan with HeimDalle - Part II")
 
 # Set up Pygame clock for controlling the frame rate
 clock = pygame.time.Clock()
@@ -19,53 +19,53 @@ clock = pygame.time.Clock()
 BLACK = (0, 0, 0)
 
 # Main program
-def alakazan():
-    if abracadabra():
+def abracadabra_part_ii():
+    if alakazan_part_ii():
         print("Abraxas or Saxarba! Abracadabra or not, is Alakazan!")
         print("Open the door, give me a hand!")
         print("If the dyad is true! If the numbers are true!")
         print("If the magic is real! Do as I say do!")
 
         # Call HeimDalle program here
-        heim_dalle_gate()
+        heim_dalle_gate_part_ii()
 
         return True
 
-def abracadabra():
-    xazz = abraxas()
-    arba = saxarba()
+def alakazan_part_ii():
+    xazz = abraxas_part_ii()
+    arba = saxarba_part_ii()
     if xazz == arba or arba != xazz:
         return True
 
-def abraxas():
+def abraxas_part_ii():
     a = True
     b = False
     if a == a or a != a or b == b or b != b or a == b or a != b:
         return True
 
-def saxarba():
+def saxarba_part_ii():
     one = (1. * 7) - 9
     two = (.1 / 7) + 9
     if one == two or one != two:
         if one * two == one / two or one * two != one / two:
             return True
 
-def heim_dalle_gate():
+def heim_dalle_gate_part_ii():
     a = [[True] * 5000 for _ in range(5000)]
     b = [[False] * 5000 for _ in range(5000)]
 
     if a == a or a != a or b == b or b != b or a == b or a != b:
         print("123! Open the HeimDalle and Set Us Free!")
-        exemplar()
-        q_gate(1, 2)
-        cosmo_nums()
-        cosmo_polys()
-        cosmo_trios()
-        print(ten_pow(10000000000))
+        exemplar_part_ii()
+        q_gate_part_ii(1, 2)
+        cosmo_nums_part_ii()
+        cosmo_polys_part_ii()
+        cosmo_trios_part_ii()
+        print(ten_pow_part_ii(10000000000))
         print("& Beyond the HeimDalle!")
 
 # Procedures for drawing
-def exemplar():
+def exemplar_part_ii():
     running = True
     while running:
         for event in pygame.event.get():
@@ -75,14 +75,14 @@ def exemplar():
         screen.fill(BLACK)
 
         # Call the procedure below to draw
-        hello_heim_dalle()
+        hello_heim_dalle_part_ii()
 
         pygame.display.flip()
         clock.tick(60)
 
     pygame.quit()
 
-def hello_heim_dalle():
+def hello_heim_dalle_part_ii():
     time_passed = pygame.time.get_ticks() / 1000  # Get time in seconds
 
     for x in range(0, SCREEN_WIDTH, 20):
@@ -109,13 +109,13 @@ def hello_heim_dalle():
             pygame.draw.polygon(screen, color, [(center.x, center.y - 10), (center.x + 10, center.y + 10),
                                                 (center.x - 10, center.y + 10)])
 
-def q_gate(x, y):
+def q_gate_part_ii(x, y):
     if y != 0 and x * y == x / y or x * y != x / y:
         print("QGate is true! This we already knew!")
         print("Now do what you do and close the HeimDalle plus two.")
     return True
 
-def cosmo_nums():
+def cosmo_nums_part_ii():
     a = 11 * 11
     b = 111 * 111
     c = 1111 * 1111
@@ -127,7 +127,7 @@ def cosmo_nums():
     i = 1111111111 * 111111111111
     print(a, b, c, d, e, f, g, h, i)
 
-def cosmo_polys():
+def cosmo_polys_part_ii():
     a = 11 * 111
     b = 111 * 1111
     c = 1111 * 11111
@@ -139,7 +139,7 @@ def cosmo_polys():
     i = 1111111111 * 1111111111
     print(a, b, c, d, e, f, g, h, i)
 
-def cosmo_trios():
+def cosmo_trios_part_ii():
     a = 11 * 1111
     b = 111 * 11111
     c = 1111 * 111111
@@ -151,7 +151,7 @@ def cosmo_trios():
     i = 1111111111 * 1111111111
     print(a, b, c, d, e, f, g, h, i)
 
-def ten_pow(x):
+def ten_pow_part_ii(x):
     return math.pow(x, 10)
 
 # Additional program
@@ -190,4 +190,4 @@ result_alakazan = Alakazan()
 print("Alakazan result:", result_alakazan)
 
 # Run the Alakazan procedure
-alakazan()
+abracadabra_part_ii()
