@@ -1,2 +1,2 @@
 # heimdalle
-examples of odin that runs polyrefractal parallax
+examples of odin and python that runs polyrefractal parallax
