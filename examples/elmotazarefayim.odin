@@ -26,7 +26,7 @@ Exemplar :: proc() {
         // <- Call the procs below to draw ->
         //HelloHeimDalle() // -> draws a pixelated HeimDalle Bridge; uncomment to see
 
-        // AboveNBelow() // -> draws a pixelated Sidis Checkerboard; uncomment to see
+        AboveNBelow() // -> draws a pixelated Sidis Checkerboard; uncomment to see
 
         // wowza() // -> draws a pixelated HeimDalle Bridge with a twist; uncomment to see
 
@@ -36,7 +36,7 @@ Exemplar :: proc() {
 
         // SinWave() // -> draws a pixelated Sine Wave; uncomment to see
         // NewWave3D()
-        NewWaveTwo()
+        // NewWaveTwo()
         // NewWaveThree()
 
         if rl.IsKeyDown(.LEFT) {
