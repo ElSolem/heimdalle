@@ -115,7 +115,7 @@ HeimDalleGate :: proc() -> any { // Qbit genny
 }
 
 QGate :: proc(x, y: int) -> bool { // supermath genny
-    if x * y == x / y || x * y != x / y {
+    if x * y == x / y && x * y != x / y {
         fmt.println("QGate is true! This we already knew!")
         fmt.println("Now do what you do and close the HeimDalle plus two!")
     }
@@ -313,7 +313,8 @@ AboveNBelow :: proc() {
         for y in 1..=SCREEN_HEIGHT {
             center := rl.Vector2{f32(x), f32(y)}
             // <- Check the condition and draw the pixel ->
-            if math.pow(math.tan_f32(center.x * center.y), 6) <= math.pow(math.tan_f32(center.x / center.y), (2/3)) * .000001 {
+            if math.pow(math.tan_f32(center.x * center.y), 6) <= math.pow(math.tan_f32(center.x / center.y), (2/3)) * .000001 ||
+            math.pow(math.tan_f32(center.x * center.y), 6) == math.pow(math.tan_f32(center.x / center.y), (2/3)) * .000001 {
                 rl.DrawPixelV(center, color)
             }
         }
