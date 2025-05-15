@@ -28,16 +28,16 @@ Exemplar :: proc() {
 
         AboveNBelow() // -> draws a pixelated Sidis Checkerboard; uncomment to see
 
-        // wowza() // -> draws a pixelated HeimDalle Bridge with a twist; uncomment to see
+        //wowza() // -> draws a pixelated HeimDalle Bridge with a twist; uncomment to see
 
         // CosWave() // -> draws a pixelated Cosine Wave; uncomment to see
 
-        // TanWave() // -> draws a pixelated Tangent Wave; uncomment to see
+        //TanWave() // -> draws a pixelated Tangent Wave; uncomment to see
 
         // SinWave() // -> draws a pixelated Sine Wave; uncomment to see
-        // NewWave3D()
-        // NewWaveTwo()
-        // NewWaveThree()
+        //NewWave3D()
+        //NewWaveTwo()
+        //NewWaveThree()
 
         if rl.IsKeyDown(.LEFT) {
             player_vel.x = -400
