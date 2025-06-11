@@ -2,7 +2,7 @@ package examples
 
 import "core:slice"
 import "core:fmt"
-import "core:intrinsics"
+import "base:intrinsics"
 import "core:math"
 
 One := math.tan_f64(1.1)

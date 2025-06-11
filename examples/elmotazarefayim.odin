@@ -2,13 +2,14 @@ package examples
 
 import "core:slice"
 import "core:fmt"
-import "core:intrinsics"
+import "base:intrinsics"
 import "core:math"
 import rl "vendor:raylib"
 
 // <- window size constants ->
 SCREEN_WIDTH :i32= 1280
 SCREEN_HEIGHT :i32= 720
+
 
 Exemplar :: proc() {
     rl.InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "HeimDalle")
@@ -294,7 +295,7 @@ HelloHeimDalle :: proc() {
         for y in 1..=SCREEN_HEIGHT {
             center := rl.Vector2{f32(x), f32(y)}
             // <- Check the condition and draw the pixel ->
-            if int(math.cos_f32(center.x)) * int(math.sin_f32(center.y)) >= int(math.tan_f32(9.9)) {
+            if (math.cos_f32(center.x)) * (math.sin_f32(center.y)) >= (math.tan_f32(9.9)) {
                 rl.DrawPixelV(center, color)
             }
         }
