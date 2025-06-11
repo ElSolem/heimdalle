@@ -34,7 +34,8 @@ main :: proc() {
             //TanFractalWave() // Same as Cos and Sin but better cacscade and moire pattern
             //PixelCheckerBoard() // Checkerboard pixel grid
             //InfiniHatching() //Crazy hatching pattern
-            FourdimeSonicVisual() //This fully creates the fourdime sound effect visually
+            //FourdimeSonicVisual() //This fully creates the fourdime sound effect visually
+            //NewWave() //Just a bland cascade, need to play more
         }
     }
 }
@@ -216,3 +217,27 @@ FourdimeSonicVisual :: proc() {
         }
     }
 }
+
+NewWave :: proc() {
+    // <- Calculate hue based on time to change color smoothly ->
+    hue := (f32(rl.GetTime()) / 10) * 36.0
+
+    // <- Calculate color from HSV values ->
+    color := rl.ColorFromHSV(hue, 0.75, 0.75)
+
+    // <- Iterate through each pixel on the screen ->
+    for x in 0..=SCREEN_WIDTH {
+        for y in 0..=(SCREEN_HEIGHT) {
+            center := rl.Vector2{f32(x), f32(y)}
+            uv := rl.Vector2{
+                (center.x / SCREEN_WIDTH) * 20.0 - 10.0,
+                (center.y / SCREEN_HEIGHT) * 20.0 - 10.0,
+            }
+
+            val := abs(BigTan(int(center.x / center.y))) - BigTan(0.0)
+            shade := clamp(val, 0.0, 1.0)
+            rl.DrawPixelV(center, rl.ColorFromHSV(hue, 0.75, f32(shade)))
+        }
+    }
+}
+

@@ -38,15 +38,15 @@ fmt.printf("Time taken: %.3f ms\n", f64(dt) / f64(time.Millisecond))
 
 // Math Funcs
 BigTan :: proc(x: int) -> f64 {
-    return math.tan_f64(f64(x))
+    return math.tan(f64(x))
 }
 
 BigCos :: proc(x: int) -> f64 {
-    return math.cos_f64(f64(x))
+    return math.cos(f64(x))
 }
 
 BigSin :: proc(x: int) -> f64 {
-    return math.sin_f64(f64(x))
+    return math.sin(f64(x))
 }
 
 BigPow :: proc(x, y: int) -> f64 {
