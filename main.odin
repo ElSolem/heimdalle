@@ -15,7 +15,7 @@ SCREEN_WIDTH :: 1280
 SCREEN_HEIGHT :: 720
 
 main :: proc() {
-    if fourdime_init() {
+    if FourdimeInit() {
         rl.InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "HeimDalle")
         defer rl.CloseWindow()
 
@@ -26,19 +26,20 @@ main :: proc() {
             rl.ClearBackground(rl.BLACK)
 
             // <- Draw all procs after this point ->
-            // HelloHeimDalle() // Square pattern made of pixel level triangles
-            // AboveNBelow() //Scattered Concentric Dot Pattern
-            // Wowza() // Combination of the above two
-            //CosWave() // Streaking parallax with dif patterns
-            //SinWave() // Same as above with better cascade
-            //TanWave() // Same as Cos and Sin but better cacscade and moire pattern
-            //NewWaveTwo() // Checkerboard pixel grid
-            //NewWave3D() //Crazy hatching pattern
+            //DotTriangleSquares() // Square pattern made of pixel level triangles
+            //ChaosDotGrid() //Scattered Concentric Dot Pattern
+            //FractalPoints() // Combination of the above two
+            //CosFractalWave() // Streaking parallax with dif patterns
+            //SinFractalWave() // Same as above with better cascade
+            //TanFractalWave() // Same as Cos and Sin but better cacscade and moire pattern
+            //PixelCheckerBoard() // Checkerboard pixel grid
+            //InfiniHatching() //Crazy hatching pattern
+            FourdimeSonicVisual() //This fully creates the fourdime sound effect visually
         }
     }
 }
 
-HelloHeimDalle :: proc() {
+DotTriangleSquares :: proc() {
     // <- Calculate hue based on time to change color smoothly ->
     hue := (f32(rl.GetTime()) / 10) * 360.0
 
@@ -57,7 +58,7 @@ HelloHeimDalle :: proc() {
     } 
 }
 
-AboveNBelow :: proc() {
+ChaosDotGrid :: proc() {
     // <- Calculate hue based on time to change color smoothly ->
     hue := (f32(rl.GetTime()) / 10) * 360.0
 
@@ -77,7 +78,7 @@ AboveNBelow :: proc() {
     } 
 }
 
-Wowza :: proc() {
+FractalPoints :: proc() {
     // <- Calculate hue based on time to change color smoothly ->
     hue := (f32(rl.GetTime()) / 10) * 360.0
 
@@ -96,7 +97,7 @@ Wowza :: proc() {
     }
 }
 
-CosWave :: proc() {
+CosFractalWave :: proc() {
     // <- Calculate hue based on time to change color smoothly ->
     hue := (f32(rl.GetTime()) / 10) * 36.0
 
@@ -115,7 +116,7 @@ CosWave :: proc() {
     }
 }
 
-TanWave :: proc() {
+TanFractalWave :: proc() {
     // <- Calculate hue based on time to change color smoothly ->
     hue := (f32(rl.GetTime()) / 10) * 36.0
 
@@ -134,7 +135,7 @@ TanWave :: proc() {
     }
 }
 
-SinWave :: proc() {
+SinFractalWave :: proc() {
     // <- Calculate hue based on time to change color smoothly ->
     hue := (f32(rl.GetTime()) / 10) * 36.0
 
@@ -154,7 +155,7 @@ SinWave :: proc() {
 }
 
 
-NewWave3D :: proc() {
+InfiniHatching :: proc() {
     // <- Calculate hue based on time to change color smoothly ->
     hue := (f32(rl.GetTime()) / 10) * 36.0
 
@@ -173,7 +174,7 @@ NewWave3D :: proc() {
     }
 }
 
-NewWaveTwo :: proc() {
+PixelCheckerBoard :: proc() {
     // <- Calculate hue based on time to change color smoothly ->
     hue := (f32(rl.GetTime()) / 10) * 36.0
 
@@ -188,6 +189,30 @@ NewWaveTwo :: proc() {
             if f64(math.cos_f32(center.x) * math.sin_f32(center.y)) >= BigTan(0.0) {
                 rl.DrawPixelV(center, color)
             }
+        }
+    }
+}
+
+FourdimeSonicVisual :: proc() {
+    // <- Calculate hue based on time to change color smoothly ->
+    hue := (f32(rl.GetTime()) / 10) * 36.0
+
+    // <- Calculate color from HSV values ->
+    color := rl.ColorFromHSV(hue, 0.75, 0.75)
+
+    // <- Iterate through each pixel on the screen ->
+    for x, w in 0..=SCREEN_WIDTH {
+        for y, z in 0..=(SCREEN_HEIGHT) {
+            center := rl.Vector2{f32(x), f32(y)}
+            uv := rl.Vector2{
+                (center.x / SCREEN_WIDTH) * 20.0 - 10.0,
+                (center.y / SCREEN_HEIGHT) * 20.0 - 10.0,
+            }
+
+            val := abs(math.tan(uv.y * uv.y)) - math.tan(uv.x / uv.y)
+            shade := clamp(val, 0.0, 1.0)
+            rl.DrawPixelV(center, rl.ColorFromHSV(hue, 0.75, shade))
+
         }
     }
 }

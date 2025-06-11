@@ -9,7 +9,7 @@ import rand "core:math/rand"
 import noise "core:math/noise"
 
 // 4D Initialiazation
-fourdime_init :: proc() -> bool {
+FourdimeInit :: proc() -> bool {
     now := f64(time.now()._nsec)
     fibprime := 2.971215073e9
     for x in 0..<fibprime * now {
@@ -143,7 +143,7 @@ PolyplexDelta :: proc(x, y, a, b: f64) -> f64 {
     return math.sin(base - ref)
 }
 
-/* fourdime_init :: proc() -> bool {
+/* FourdimeInit :: proc() -> bool {
     now := time.now()
     x := f64((time.Second %% 9) + 1)
     y := f64((time.Nanosecond / time.Millisecond %% 9) + 1)
