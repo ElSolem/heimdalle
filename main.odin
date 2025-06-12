@@ -35,7 +35,7 @@ main :: proc() {
             //PixelCheckerBoard() // Checkerboard pixel grid
             //InfiniHatching() //Crazy hatching pattern
             //FourdimeSonicVisual() //This fully creates the fourdime sound effect visually
-            //NewWave() //Just a bland cascade, need to play more
+            NewWave() //Cascade, need to play more
         }
     }
 }
@@ -236,7 +236,7 @@ NewWave :: proc() {
 
             val := abs(BigTan(int(center.x / center.y))) - BigTan(0.0)
             shade := clamp(val, 0.0, 1.0)
-            rl.DrawPixelV(center, rl.ColorFromHSV(hue, 0.75, f32(shade)))
+            rl.DrawPixelV(center, rl.ColorFromHSV(hue, f32(shade), 0.75))
         }
     }
 }
