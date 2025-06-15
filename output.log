@@ -42,3 +42,6 @@ INFO: TEXTURE: [ID 2] Unloaded texture data from VRAM (GPU)
 INFO: SHADER: [ID 3] Default shader unloaded successfully
 INFO: TEXTURE: [ID 1] Default texture unloaded successfully
 INFO: Window closed successfully
+Time taken: 20.002859509s seconds
+Time taken: 20.003 seconds
+Time taken: 20002.860 ms

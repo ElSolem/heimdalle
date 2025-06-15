@@ -15,6 +15,7 @@ SCREEN_WIDTH :: 1280
 SCREEN_HEIGHT :: 720
 
 main :: proc() {
+    t0 := time.now()
     if FourdimeInit() {
         rl.InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "HeimDalle")
         defer rl.CloseWindow()
@@ -35,9 +36,18 @@ main :: proc() {
             //PixelCheckerBoard() // Checkerboard pixel grid
             //InfiniHatching() //Crazy hatching pattern
             //FourdimeSonicVisual() //This fully creates the fourdime sound effect visually
-            NewWave() //Cascade, need to play more
+            //NewWave() //Cascade, need to play more
+            //SidisCheckerboard()
+            SidisMirrorBoard()
+
         }
     }
+    t1 := time.now()
+    dt := time.diff(t0, t1)
+
+    fmt.printf("Time taken: %.2f seconds\n", dt)
+    fmt.printf("Time taken: %.3f seconds\n", f64(dt) / f64(time.Millisecond) / 1000.0)
+    fmt.printf("Time taken: %.3f ms\n", f64(dt) / f64(time.Millisecond))
 }
 
 DotTriangleSquares :: proc() {
@@ -241,3 +251,84 @@ NewWave :: proc() {
     }
 }
 
+SidisCheckerboard :: proc() {
+    // <- Calculate hue based on time to change color smoothly ->
+    hue := (f32(rl.GetTime()) / 10.0) * 36.0
+
+    // <- Iterate through each pixel on the screen ->
+    for x in 0..=SCREEN_WIDTH {
+        for y in 0..=SCREEN_HEIGHT {
+            center := rl.Vector2{f32(x), f32(y)}
+
+            // Normalize pixel position to [0,1], then map to [-10,10]
+            uv := rl.Vector2{
+                (center.x / f32(SCREEN_WIDTH)) * 20.0 - 10.0,
+                (center.y / f32(SCREEN_HEIGHT)) * 20.0 - 10.0,
+            }
+
+            // Calculate sine values
+            sinx := math.sin_f32(uv.x + f32(rl.GetTime()))
+            siny := math.sin_f32(uv.y + f32(rl.GetTime()))
+            sinparty := math.sin_f32((sinx * siny) * f32(rl.GetTime()))
+            sinpeace := math.sin_f32((sinx / siny) * f32(rl.GetTime()))
+
+            // Calculate tanparty and tanpeace using pow
+            tanparty := math.pow_f32(uv.x * uv.y, 6.0)
+            tanpeace := math.pow_f32(uv.x / uv.y, 0.33)
+
+            // Fuzzy equality check
+            diff := abs(math.tan_f32(tanparty)) == math.tan_f32(tanpeace)
+
+            // Color from HSV based on which side of the condition it's on
+            shade_color: rl.Color
+            if diff {
+                shade_color = rl.ColorFromHSV(hue, siny, sinpeace)
+            } else {
+                shade_color = rl.ColorFromHSV(hue, sinx, sinparty)
+            }
+
+            rl.DrawPixelV(center, shade_color)
+        }
+    }
+}
+
+SidisMirrorBoard :: proc() {
+    // <- Calculate hue based on time to change color smoothly ->
+    hue := (f32(rl.GetTime()) / 10.0) * 36.0
+
+    // <- Iterate through each pixel on the screen ->
+    for x in 0..=SCREEN_WIDTH {
+        for y in 0..=SCREEN_HEIGHT {
+            center := rl.Vector2{f32(x), f32(y)}
+
+            // Normalize pixel position to [0,1], then map to [-10,10]
+            uv := rl.Vector2{
+                (center.x / f32(SCREEN_WIDTH)) * 20.0 - 10.0,
+                (center.y / f32(SCREEN_HEIGHT)) * 20.0 - 10.0,
+            }
+
+            // Calculate sine values
+            sinx := math.sin_f32(uv.x + f32(rl.GetTime()))
+            siny := math.sin_f32(uv.y + f32(rl.GetTime()))
+            sinparty := math.sin_f32((sinx * siny) * f32(rl.GetTime()))
+            sinpeace := math.sin_f32((sinx / siny) * f32(rl.GetTime()))
+
+            // Calculate tanparty and tanpeace using pow
+            tanparty := math.pow_f32(uv.x * uv.y, 6.0)
+            tanpeace := math.pow_f32(uv.x / uv.y, 0.33)
+
+            // Fuzzy equality check
+            diff := abs(math.tan_f32(tanparty)) <= math.tan_f32(tanpeace)
+
+            // Color from HSV based on which side of the condition it's on
+            shade_color: rl.Color
+            if diff {
+                shade_color = rl.ColorFromHSV(hue, siny, sinpeace)
+            } else {
+                shade_color = rl.ColorFromHSV(hue, sinx, sinparty)
+            }
+
+            rl.DrawPixelV(center, shade_color)
+        }
+    }
+}
