@@ -37,11 +37,17 @@ INFO: RLGL: Default OpenGL state initialized successfully
 INFO: TEXTURE: [ID 2] Texture loaded successfully (128x128 | GRAY_ALPHA | 1 mipmaps)
 INFO: FONT: Default font loaded successfully (224 glyphs)
 INFO: SYSTEM: Working Directory: /home/elsolem/Documents/Polycodex/heimdalle
+INFO: AUDIO: Device initialized successfully
+INFO:     > Backend:       miniaudio | PulseAudio
+INFO:     > Format:        32-bit IEEE Floating Point -> 16-bit Signed Integer
+INFO:     > Channels:      2 -> 2
+INFO:     > Sample rate:   44100 -> 44100
+INFO:     > Periods size:  3306
 INFO: TIMER: Target time per frame: 16.667 milliseconds
 INFO: TEXTURE: [ID 2] Unloaded texture data from VRAM (GPU)
 INFO: SHADER: [ID 3] Default shader unloaded successfully
 INFO: TEXTURE: [ID 1] Default texture unloaded successfully
 INFO: Window closed successfully
-Time taken: 20.002859509s seconds
-Time taken: 20.003 seconds
-Time taken: 20002.860 ms
+Time taken: 7m15.147920209s seconds
+Time taken: 435.148 seconds
+Time taken: 435147.920 ms

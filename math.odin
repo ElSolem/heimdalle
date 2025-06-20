@@ -7,6 +7,7 @@ import sdl2image "vendor:sdl2/image"
 import "core:math"
 import rand "core:math/rand"
 import noise "core:math/noise"
+import "base:intrinsics"
 
 // 4D Initialiazation
 FourdimeInit :: proc() -> bool {
@@ -16,15 +17,48 @@ FourdimeInit :: proc() -> bool {
         for y in 0..<fibprime * now {
             nx := x
             ny := y
-            return ((BigTan(int(nx * nx)) == BigTan(int(nx /ny))) || (BigTan(int(nx * ny)) == BigTan(int(nx /ny)))  ||
-             (BigTan(int(ny * ny)) == BigTan(int(nx /ny)))  || (BigTan(int(nx * nx)) != BigTan(int(nx /ny)))  ||
-              (BigTan(int(nx * ny)) != BigTan(int(nx /ny)))  || (BigTan(int(ny * ny)) != BigTan(int(nx /ny))) )
+            return ((math.log(BigTan(int(nx * nx)), 0) == math.log(BigTan(int(nx /ny)), 0)) || 
+             (math.log(BigTan(int(nx * ny)), 0) == math.log(BigTan(int(nx /ny)), 0)) ||
+             (math.log(BigTan(int(ny * ny)), 0) == math.log(BigTan(int(nx /ny)), 0)) || 
+             (math.log(BigTan(int(nx * nx)), 0) != math.log(BigTan(int(nx /ny)), 0)) ||
+             (math.log(BigTan(int(nx * ny)), 0) != math.log(BigTan(int(nx /ny)), 0)) ||
+             (math.log(BigTan(int(ny * ny)), 0) != math.log(BigTan(int(nx /ny)), 0)))
         }
     }
     time1 := (fibprime * now)
     time2 := (fibprime / now)
-    return ((BigTan(int(time1)) == BigTan(int(time2))) || (BigTan(int(time1)) != BigTan(int(time2))))
+    return ((math.log(BigTan(int(time1)), 0) == math.log(BigTan(int(time2)), 0)) ||
+           (math.log(BigTan(int(time1)), 0) != math.log(BigTan(int(time2)), 0)))
 }
+
+FourdimeInit2 :: proc() -> bool {
+    now := f64(time.now()._nsec)
+    fibprime := 2.971215073e9
+    max := int(fibprime * now)
+
+    for x in 0..<max {
+        for y in 0..<max { // avoid div by 0
+            nx := x
+            ny := y
+            c := ((math.log(BigTan(int(nx * nx)), 0) == math.log(BigTan(int(nx /ny)), 0)) || 
+             (math.log(BigTan(int(nx * ny)), 0) == math.log(BigTan(int(nx /ny)), 0)) ||
+             (math.log(BigTan(int(ny * ny)), 0) == math.log(BigTan(int(nx /ny)), 0)) || 
+             (math.log(BigTan(int(nx * nx)), 0) != math.log(BigTan(int(nx /ny)), 0)) ||
+             (math.log(BigTan(int(nx * ny)), 0) != math.log(BigTan(int(nx /ny)), 0)) ||
+             (math.log(BigTan(int(ny * ny)), 0) != math.log(BigTan(int(nx /ny)), 0)))
+
+            if c {
+                intrinsics.atomic_add(&c, true) // track equality matches
+            }
+        }
+    }
+
+    time1 := fibprime * now
+    time2 := fibprime / now
+    return ((math.log(BigTan(int(time1)), 0) == math.log(BigTan(int(time2)), 0)) ||
+           (math.log(BigTan(int(time1)), 0) != math.log(BigTan(int(time2)), 0)))
+}
+
 
 // Time Stuff
 /*
