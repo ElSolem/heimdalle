@@ -29,7 +29,7 @@ PianoFrequencies: [96]f32 = {
 
 main :: proc() {
     t0 := time.now()
-    if FourdimeInit2() {
+    if Fivedime() {
         rl.InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "HeimDalle")
         defer rl.CloseWindow()
         rl.InitAudioDevice()
@@ -39,7 +39,7 @@ main :: proc() {
 
 
         rl.SetTargetFPS(60)
-        for !rl.WindowShouldClose() { if FourdimeInit2() {
+        for !rl.WindowShouldClose() { if Fivedime() {
             rl.BeginDrawing()
             defer rl.EndDrawing()
             rl.ClearBackground(rl.BLACK)

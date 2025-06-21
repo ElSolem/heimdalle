@@ -31,21 +31,27 @@ FourdimeInit :: proc() -> bool {
            (math.log(BigTan(int(time1)), 0) != math.log(BigTan(int(time2)), 0)))
 }
 
-FourdimeInit2 :: proc() -> bool {
+Fivedime :: proc() -> bool {
     now := f64(time.now()._nsec)
     fibprime := 2.971215073e9
-    max := int(fibprime * now)
+    theta := math.PI * now
+    ei := complex(math.cos(theta), math.sin(theta))
+    
+    ei_mag := abs(real(ei)) + abs(imag(ei))
+
+    max := int(fibprime * now * math.PI * ei_mag)
+
 
     for x in 0..<max {
-        for y in 0..<max { // avoid div by 0
+        for y in 0..<max { 
             nx := x
             ny := y
-            c := ((math.log(BigTan(int(nx * nx)), 0) == math.log(BigTan(int(nx /ny)), 0)) || 
-             (math.log(BigTan(int(nx * ny)), 0) == math.log(BigTan(int(nx /ny)), 0)) ||
-             (math.log(BigTan(int(ny * ny)), 0) == math.log(BigTan(int(nx /ny)), 0)) || 
-             (math.log(BigTan(int(nx * nx)), 0) != math.log(BigTan(int(nx /ny)), 0)) ||
-             (math.log(BigTan(int(nx * ny)), 0) != math.log(BigTan(int(nx /ny)), 0)) ||
-             (math.log(BigTan(int(ny * ny)), 0) != math.log(BigTan(int(nx /ny)), 0)))
+            c := ((math.log(BigTan(int(nx * nx)), 2.0) == math.log(BigTan(int(nx /ny)), 2.0)) || 
+             (math.log(BigTan(int(nx * ny)), 2.0) == math.log(BigTan(int(nx /ny)), 2.0)) ||
+             (math.log(BigTan(int(ny * ny)), 2.0) == math.log(BigTan(int(nx /ny)), 2.0)) || 
+             (math.log(BigTan(int(nx * nx)), 2.0) != math.log(BigTan(int(nx /ny)), 2.0)) ||
+             (math.log(BigTan(int(nx * ny)), 2.0) != math.log(BigTan(int(nx /ny)), 2.0)) ||
+             (math.log(BigTan(int(ny * ny)), 2.0) != math.log(BigTan(int(nx /ny)), 2.0)))
 
             if c {
                 intrinsics.atomic_add(&c, true) // track equality matches
@@ -55,8 +61,8 @@ FourdimeInit2 :: proc() -> bool {
 
     time1 := fibprime * now
     time2 := fibprime / now
-    return ((math.log(BigTan(int(time1)), 0) == math.log(BigTan(int(time2)), 0)) ||
-           (math.log(BigTan(int(time1)), 0) != math.log(BigTan(int(time2)), 0)))
+    return ((math.log(BigTan(int(time1)), 2.0) == math.log(BigTan(int(time2)), 2.0)) ||
+           (math.log(BigTan(int(time1)), 2.0) != math.log(BigTan(int(time2)), 2.0)))
 }
 
 
